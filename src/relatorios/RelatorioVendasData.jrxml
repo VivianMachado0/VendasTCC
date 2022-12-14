@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6c5e6c3-d19e-408c-913f-2ad513bd994b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="row" isItalic="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 ==0]]></conditionExpression>
+			<style mode="Transparent" forecolor="#C0C0C0" backcolor="#D9D4D4"/>
+		</conditionalStyle>
+	</style>
+	<style name="style1"/>
+	<parameter name="DataInicial" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_cliente.`pk_id_cliente` AS tbl_cliente_pk_id_cliente,
+     tbl_cliente.`cli_nome` AS tbl_cliente_cli_nome,
+     tbl_cliente.`cli_endereco` AS tbl_cliente_cli_endereco,
+     tbl_cliente.`cli_bairro` AS tbl_cliente_cli_bairro,
+     tbl_cliente.`cli_cidade` AS tbl_cliente_cli_cidade,
+     tbl_cliente.`cli_uf` AS tbl_cliente_cli_uf,
+     tbl_cliente.`cli_cep` AS tbl_cliente_cli_cep,
+     tbl_cliente.`cli_telefone` AS tbl_cliente_cli_telefone,
+     tbl_produto.`pk_id_produto` AS tbl_produto_pk_id_produto,
+     tbl_produto.`pro_nome` AS tbl_produto_pro_nome,
+     tbl_produto.`pro_valor` AS tbl_produto_pro_valor,
+     tbl_vendas.`pk_id_vendas` AS tbl_vendas_pk_id_vendas,
+     tbl_vendas.`ven_data_venda` AS tbl_vendas_ven_data_venda,
+     tbl_vendas.`ven_desconto` AS tbl_vendas_ven_desconto,
+     tbl_vendas_produtos.`pk_id_venda_produto` AS tbl_vendas_produtos_pk_id_venda_produto,
+     tbl_vendas_produtos.`ven_pro_quantidade` AS tbl_vendas_produtos_ven_pro_quantidade,
+     tbl_vendas_produtos.`fk_produto` AS tbl_vendas_produtos_fk_produto,
+     tbl_vendas.`ven_valor_liquido` AS tbl_vendas_ven_valor_liquido,
+     tbl_vendas.`ven_valor_bruto` AS tbl_vendas_ven_valor_bruto,
+     tbl_vendas_produtos.`fk_vendas` AS tbl_vendas_produtos_fk_vendas,
+     tbl_vendas_produtos.`ven_pro_valor` AS tbl_vendas_produtos_ven_pro_valor
+FROM
+     `tbl_cliente` tbl_cliente INNER JOIN `tbl_vendas` tbl_vendas ON tbl_cliente.`pk_id_cliente` = tbl_vendas.`fk_cliente`
+     INNER JOIN `tbl_vendas_produtos` tbl_vendas_produtos ON tbl_vendas.`pk_id_vendas` = tbl_vendas_produtos.`fk_vendas`
+     INNER JOIN `tbl_produto` tbl_produto ON tbl_vendas_produtos.`fk_produto` = tbl_produto.`pk_id_produto`
+WHERE tbl_vendas.`ven_data_venda` BETWEEN $P{DataInicial} and  $P{DataFinal}]]>
+	</queryString>
+	<field name="tbl_cliente_pk_id_cliente" class="java.math.BigInteger"/>
+	<field name="tbl_cliente_cli_nome" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_endereco" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_bairro" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_cidade" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_uf" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_cep" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_telefone" class="java.lang.String"/>
+	<field name="tbl_produto_pk_id_produto" class="java.math.BigInteger"/>
+	<field name="tbl_produto_pro_nome" class="java.lang.String"/>
+	<field name="tbl_produto_pro_valor" class="java.lang.Double"/>
+	<field name="tbl_vendas_pk_id_vendas" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_ven_data_venda" class="java.sql.Date"/>
+	<field name="tbl_vendas_ven_desconto" class="java.lang.Double"/>
+	<field name="tbl_vendas_produtos_pk_id_venda_produto" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_produtos_ven_pro_quantidade" class="java.lang.Integer"/>
+	<field name="tbl_vendas_produtos_fk_produto" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_ven_valor_liquido" class="java.lang.Double"/>
+	<field name="tbl_vendas_ven_valor_bruto" class="java.lang.Double"/>
+	<field name="tbl_vendas_produtos_fk_vendas" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_produtos_ven_pro_valor" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="112" splitType="Stretch">
+			<staticText>
+				<reportElement x="48" y="11" width="323" height="39" uuid="e9289452-f1d1-488c-b656-8b5920f2186a"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Vendas por Data]]></text>
+			</staticText>
+			<image>
+				<reportElement x="390" y="11" width="109" height="64" uuid="7f25171c-b24f-452f-8bf8-6eb60f22080b"/>
+				<imageExpression><![CDATA["C:\\Users\\Vivian2\\OneDrive\\Documentos\\NetBeansProjects\\VendasBBQ\\src\\imagens\\LogoPreto.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="111" width="555" height="1" uuid="44aec6bf-16a5-4339-b281-0dc0f28d470e"/>
+			</line>
+			<textField>
+				<reportElement x="83" y="75" width="100" height="20" uuid="df043e92-93d0-4c9d-a602-164cb22340c0"/>
+				<textFieldExpression><![CDATA[$P{DataInicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="75" width="100" height="20" uuid="fbd135f3-bb3b-4872-9fc1-ef4efaf63cb3"/>
+				<textFieldExpression><![CDATA[$P{DataFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="8" y="0" width="106" height="20" uuid="b4007a12-0d16-4ee7-bee7-a20c88d24dc9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="0" width="86" height="20" uuid="82badb06-2162-48cb-a186-ad8a51d9c5a3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR UNIT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="0" width="88" height="20" uuid="14760557-b75f-4e14-add3-a2af58288ba1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="0" width="79" height="20" uuid="7be4ed9c-0aa0-49d8-bafd-649089826268"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="0" width="108" height="20" uuid="fd3cfc53-61a0-4b04-813b-a0d1f4b489b9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME PRODUTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="79" height="20" uuid="5c25a3d5-3b53-44e7-b161-c1bd1e0bb14c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<frame>
+				<reportElement style="row" mode="Opaque" x="2" y="2" width="543" height="22" uuid="4ed080bc-cf93-4d4c-9020-aabfefec1dae"/>
+				<textField>
+					<reportElement x="119" y="2" width="87" height="20" uuid="2c988f1b-26bd-47d5-ae3d-964e96b5c94f"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{tbl_produto_pro_nome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="223" y="0" width="77" height="20" uuid="9721e348-1c2e-490b-8b26-734282ec4d1f"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{tbl_produto_pro_valor}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="302" y="0" width="88" height="20" uuid="663ec44f-0940-4aea-acdd-e41c33860c2b"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{tbl_vendas_produtos_ven_pro_quantidade}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="390" y="0" width="79" height="20" uuid="2d7744cf-7766-4f61-a021-5d557867c787"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{tbl_produto_pro_valor}*$F{tbl_vendas_produtos_ven_pro_quantidade}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="6" y="2" width="94" height="20" uuid="ac81ca35-48ef-4a05-b32b-f189caa3a95e"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{tbl_cliente_cli_nome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="474" y="2" width="67" height="18" uuid="d981f531-254c-4287-befc-886949dbfed2"/>
+					<textFieldExpression><![CDATA[$F{tbl_vendas_ven_data_venda}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="353" y="66" width="94" height="20" uuid="cc9332cb-c86c-493a-a148-180cbfa79db6"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="459" y="66" width="84" height="20" uuid="be513c72-d9e8-47b2-9924-74c9da0de9eb"/>
+				<textFieldExpression><![CDATA[($F{tbl_produto_pro_valor}*$F{tbl_vendas_produtos_ven_pro_quantidade})-$F{tbl_vendas_ven_desconto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="353" y="35" width="79" height="20" uuid="2aeeb410-013e-44e2-a573-5f4e65a40cf5"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="0" width="94" height="20" uuid="1b76f256-726e-450d-b388-b8403c7e985a"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR FINAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="459" y="35" width="88" height="20" uuid="f7ddfca4-08b2-4f47-bc31-b7c470d2fe1c"/>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_ven_desconto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="6" width="551" height="19" backcolor="#000000" uuid="90aad3a9-7f34-4faf-810f-2f9588c50b8b"/>
+				<textField>
+					<reportElement x="520" y="0" width="23" height="19" forecolor="#FFFFFF" uuid="9ee158ce-6afc-4689-afb1-03e19510149f"/>
+					<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="5" width="100" height="20" forecolor="#FFFFFF" uuid="65cf8b5d-1012-407a-9e98-70820692b7c0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

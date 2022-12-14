@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6c5e6c3-d19e-408c-913f-2ad513bd994b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="row" isItalic="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 ==0]]></conditionExpression>
+			<style mode="Transparent" forecolor="#C0C0C0" backcolor="#D9D4D4"/>
+		</conditionalStyle>
+	</style>
+	<style name="style1"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_usuario.`pk_id_usuario` AS tbl_usuario_pk_id_usuario,
+     tbl_usuario.`usu_nome` AS tbl_usuario_usu_nome,
+     tbl_usuario.`usu_login` AS tbl_usuario_usu_login,
+     tbl_usuario.`usu_senha` AS tbl_usuario_usu_senha
+FROM
+     `tbl_usuario` tbl_usuario]]>
+	</queryString>
+	<field name="tbl_usuario_pk_id_usuario" class="java.math.BigInteger"/>
+	<field name="tbl_usuario_usu_nome" class="java.lang.String"/>
+	<field name="tbl_usuario_usu_login" class="java.lang.String"/>
+	<field name="tbl_usuario_usu_senha" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="102" y="11" width="230" height="39" uuid="e9289452-f1d1-488c-b656-8b5920f2186a"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Usuários]]></text>
+			</staticText>
+			<image>
+				<reportElement x="383" y="0" width="109" height="64" uuid="7f25171c-b24f-452f-8bf8-6eb60f22080b"/>
+				<imageExpression><![CDATA["C:\\Users\\Vivian2\\OneDrive\\Documentos\\NetBeansProjects\\VendasBBQ\\src\\imagens\\LogoPreto.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="78" width="555" height="1" uuid="44aec6bf-16a5-4339-b281-0dc0f28d470e"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="56" height="20" uuid="7b81a164-5c23-4c77-8e5c-c3f0b9d329d1"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="0" width="86" height="20" uuid="b4007a12-0d16-4ee7-bee7-a20c88d24dc9"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="0" width="86" height="20" uuid="e9064f8b-a64a-453d-b7a6-76d0224954fa"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="0" width="114" height="20" uuid="ca4d9d9b-6f33-4e45-87f4-b9d04035d944"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOGIN]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<frame>
+				<reportElement style="row" mode="Opaque" x="2" y="2" width="543" height="22" uuid="4ed080bc-cf93-4d4c-9020-aabfefec1dae"/>
+				<textField>
+					<reportElement x="0" y="0" width="56" height="20" uuid="abad3190-1b57-4afb-972d-bfcd486aedae"/>
+					<textFieldExpression><![CDATA[$F{tbl_usuario_pk_id_usuario}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="181" y="2" width="100" height="20" uuid="4a31e42e-2e08-4072-9caf-14555e622661"/>
+					<textFieldExpression><![CDATA[$F{tbl_usuario_usu_login}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="297" y="0" width="86" height="24" uuid="e3788d6a-1e92-4e09-9e10-5a1e433bda2c"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*************]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="0" width="96" height="20" uuid="a4aa0605-bece-4ebe-b7bf-0b676882b582"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuario_usu_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="6" width="551" height="19" backcolor="#000000" uuid="90aad3a9-7f34-4faf-810f-2f9588c50b8b"/>
+				<textField>
+					<reportElement x="520" y="0" width="23" height="19" forecolor="#FFFFFF" uuid="9ee158ce-6afc-4689-afb1-03e19510149f"/>
+					<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="5" width="100" height="20" forecolor="#FFFFFF" uuid="65cf8b5d-1012-407a-9e98-70820692b7c0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
